@@ -2,6 +2,7 @@
 import math
 import time
 import datetime
+import sys
 # 迭代法求第n个斐波那契数
 def FibonacciD(num):
 	count = 0
@@ -23,7 +24,6 @@ def FibonacciD(num):
 	print("使用迭代法运行递归斐波那契数列的计算结果: {}".format(third))
 	print("使用迭代法运行递归斐波那契数列程序的运行时间为: {}".format(t2 - t1))
 
-
 # 迭代改进法求第n个斐波那契数
 def FibonacciDImproment(num):
 	count = 0
@@ -34,12 +34,12 @@ def FibonacciDImproment(num):
 		a = num & 1
 		num = num/2
 		num = num - 1
-		while (num>0):
-			num=num-1
+		while (num>=0):
 			a = a+b
 			count = count + 1
 			b = b+a
 			count = count + 1
+			num = num - 1
 		t2 = time.perf_counter()
 		print(count)
 		print("使用迭代法改进法运行递归斐波那契数列的计算结果: {}".format(b))
@@ -56,6 +56,51 @@ def FibonacciEquation(num):
 	print(num-2)
 	print("使用通项公式法改进法运行递归斐波那契数列的计算结果: {}".format(result))
 	print("使用通项公式法运行递归斐波那契数列程序的运行时间为: {}".format(t2 - t1))
+
+# 迭代法求不超过编程环境的最大斐波那契整数
+def GetFibonacciD():
+	t1 = time.perf_counter()
+	fnum = 0
+	num = 0
+	first = 0
+	second = 1
+	i = 1
+	for num in range(100000):
+		if (num <= 0):
+			fnum = 0
+		if (num == 1) or (num == 2):
+			fnum = 1
+		fnum = first + second
+		first = second
+		second = fnum
+		num = num + 1
+		if fnum > 9223372036854775807:
+			break
+	t2 = time.perf_counter()
+	print("利用迭代算法寻找不超过编程环境能够支持的最大整数的斐波那契数是第{}".format(num),"个斐波那契数")
+	print("运行时间为: {}".format(t2 - t1))
+
+# 迭代法求不超过30s的最大斐波那契整数
+def GetMaxFibonacciD():
+	t1 = time.perf_counter()
+	fnum = 0
+	num = 0
+	first = 0
+	second = 1
+	i = 1
+	for num in range(100000000):
+		if (num <= 0):
+			fnum = 0
+		if (num == 1) or (num == 2):
+			fnum = 1
+		fnum = first + second
+		first = second
+		second = fnum
+		num = num + 1
+		t2 = time.perf_counter()
+		if (t2-t1) > 30:
+			break
+	print("利用迭代法求不超过30s的最大斐波那契整数是第{}".format(num),"个斐波那契数")
 
 # 递归
 def Fibonacci_Recursion_tool(n):
