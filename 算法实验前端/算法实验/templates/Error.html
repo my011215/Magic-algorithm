@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>近似公式计算误差</title>
+        <link rel = "stylesheet" type="text/css" href="../static/Error.css">
+        <link rel = "stylesheet" type="text/css" href="../static/font/iconfont.css">
+        <script type="text/javascript" src="../interface.js"></script>
+        <script src="../static/font/iconfont.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+    </head>
+    <body>
+        <div id = "header">
+            <p id="p1">斐波那契数列实验</p>
+            <a href="./Menu.html"><span class="iconfont2">&#xe663;</span></a><!--目录图标-->
+            <a href="./FibonacciMenu.html"><span class="iconfont1">&#xe60b;</span></a><!--斐波那契目录图标-->
+        </div>
+        <form action="" method="">
+        <div class="box" id="box1">
+            <div class="word">
+                <p class="p">找出近似公式计算斐波那契数出现误差时的最小数</p>
+            </div>
+            <button class="custom-btn btn" type="button" onclick="Formula()"><p class="hcqStyle4">确定</p></button>
+        </div>
+        </form>
+        <div class="result" id="result1">
+            <div class="result_p"><p class="hcqStyle5">最小斐波那契数的位置</p></div>
+            <form>
+                <textarea class="form_result" id="form1" readonly="readonly"></textarea>
+            </form>
+        </div>
+    </body>
+    </html>

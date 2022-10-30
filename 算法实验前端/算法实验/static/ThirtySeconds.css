@@ -1,0 +1,221 @@
+*{margin: 0;padding: 0;}
+body{
+    display: flex;
+	flex-direction: column;
+	min-height: 100vh; 
+    background-color:#D7DFE8;
+    width:100%;
+}
+#header{
+    background-color:#ADB8D4;
+    height:7vh;
+    width:100%;
+}
+#p1{
+    position:absolute;
+    line-height: 7vh;
+    font-size: 5vh;
+    left:3vh;
+    font-family:cursive;
+    font-weight:900;
+}
+a{
+    text-decoration: none;
+}
+/*返回目录图标*/
+.iconfont1 {
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 5vh;
+    color:black;
+    position: absolute;
+    top:1vh;
+    right:3vh;
+  }
+  /*返回斐波那契目录图标*/
+.iconfont2 {
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 6vh;
+    color:black;
+    position: absolute;
+    top:0.5vh;
+    right:10vh;
+  }
+  .box{
+    width:80%;
+    height:10%;
+  }
+  #box1{
+    position: absolute;
+    top:10%;
+    left:10%;
+  }
+  .word{
+    position: absolute;
+    top:0%;;
+    left:2.5%;
+    width:70%;
+    height:80%;
+    border:0.7vh solid transparent;
+    border-image:linear-gradient(45deg,#aed0f4,#ADBFD4)1;
+    background-color: white;
+    animation: huerotate 6s infinite linear;
+    filter: hue-rotate(360deg);
+    clip-path: inset(0px round 10px);
+  }
+  @keyframes huerotate {
+    0% {
+      filter: hue-rotate(0deg);
+    }
+    100% {
+      filter: hue-rorate(360deg);
+    }
+  }
+  .p{
+    font-size:5vh;
+    font-family: cursive;
+    font-weight: bold;
+    margin:1.2vh auto;
+    margin-left: 2vh;
+  }
+  .custom-btn {
+    width: 130px;
+    width:13vw;
+    height:8vh;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+      7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  }
+  .btn {
+    position:absolute;
+    right:2.5%;
+    top:1vh;
+    border: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  .btn:after {
+    position: absolute;
+    content: " ";
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1fd1f9;
+    background-image: linear-gradient(315deg, #ADB8D4 35%, #D7DFE8 75%);
+    transition: all 0.3s ease;
+  }
+  .btn:hover {
+    background: transparent;
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+      -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+      inset 4px 4px 6px 0 rgba(116, 125, 136, 0.3);
+    color: #fff;
+  }
+  .btn:hover:after {
+    -webkit-transform: scale(2) rotate(180deg);
+    transform: scale(2) rotate(180deg);
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+      -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+      inset 4px 4px 6px 0 rgba(116, 125, 136, 0.3);
+  }
+  .hcqStyle4{
+    display:inline-block;
+    font-size:5vh;
+    font-family:cursive;
+    font-weight:bold;color:rgb(28, 28, 28);
+    margin:-0.5vh auto;
+}
+#box2{
+  position: absolute;
+  top:25%;
+  left:10%;
+}
+.result{
+  width:35%;
+  height:50%;
+}
+#result1{
+  position: absolute;
+  top:45%;
+  left:12%;
+}
+#result2{
+  position: absolute;
+  top:45%;
+  right:12%;
+}
+.result_p{
+  width:98%;
+  height:15%;
+  margin:1vh auto;
+  background-color: #ADB8D4;
+  text-align: center;
+  /* border: 0.5vh solid #ADB8D4; */
+  border-radius: 50vh;
+  /* border:0.5vh solid transparent;
+    border-image:linear-gradient(45deg,#ADBFD4,#aed0f4)1;
+    background-color: white;
+    animation: huerotate 6s infinite linear;
+    filter: hue-rotate(360deg);
+    clip-path: inset(0px round 10px); */
+}
+.hcqStyle5{
+    display:inline-block;
+    font-size:4vh;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight:bold;color:#D7DFE8;
+    text-shadow:0 0 1px currentColor,-1px -1px 3px #000000,0 -1px 3px #000000,1px -1px 3px #071E59,1px 0 3px #071E59,1px 1px 3px #071E59,0 1px 3px #000000,-1px 1px 3px #000000,-1px 0 3px #000000;
+    -webkit-filter:url(#diff1);filter:url(#diff1);
+    margin:1.5vh auto;
+}
+.form_result{
+  width:98%;
+  height:34vh;
+  margin:2vh auto;
+  text-align: center;
+  font-size:10vh;
+  border: 0.5vh solid #ADB8D4;
+  border-radius: 2vh;
+  /* border:0.7vh solid transparent;
+    border-image:linear-gradient(45deg,#ADBFD4,#aed0f4)1;
+    background-color: white;
+    animation: huerotate 6s infinite linear;
+    filter: hue-rotate(360deg);
+    clip-path: inset(0px round 10px); */
+}
+.table1{
+  margin:3vh auto;
+  width:90%;
+  height:34vh;
+  background-color: white;
+  border:0.5vh solid #ADB8D4;
+  border-radius: 2vh;
+}
+.table1 tr th{
+  width:30%;
+  border-radius: 1vh;
+  border:0.5vh solid #ADB8D4;
+}
+.table1 tr td{
+  text-align: center;
+  border-radius: 1vh;
+  border:0.5vh solid #ADB8D4;
+}
