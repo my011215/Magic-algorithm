@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-import logicalLayer
+from logicalLayer import init
 from flask_cors import CORS  # 导入CORS库
 import sys
 
@@ -11,7 +11,7 @@ CORS(app, supports_credentials=True)  # 配置全局路由
 # 递归法求系统环境最大斐波那契数位置接口
 @app.route('/api/recursiveEnvMax', methods=['GET'])
 def recursiveEnvMax():
-    data = logicalLayer.maxNumFib()
+    data = init.maxNumFib()
     res = {
         "status_code": 0,
         "status_msg": "success",
@@ -23,8 +23,8 @@ def recursiveEnvMax():
 # 1分钟递归求系统最大支持数接口
 @app.route('/api/oneMinuteRecursive', methods=['POST'])
 def oneMinuteRecursive():
-    getJson = request.json  # 获取 JOSN 数据
-    data = logicalLayer.oneMinFib(int(getJson['n']))
+    getJson = request.json  # 获取 JOSN 数据int(getJson['n']
+    data = init.oneMinFib(int(getJson['n']))
     res = {
         "status_code": 0,
         "status_msg": "success",
@@ -41,11 +41,11 @@ def fiveMethodsShow():
     print(getJson)
     # n = 4
     n = int(n)
-    nameArr1 = logicalLayer.FibonacciD(n)
-    nameArr2 = logicalLayer.FibonacciDImproment(n)
-    nameArr3 = logicalLayer.demoFibonacci_Recursion_tool(n)
-    nameArr4 = logicalLayer.FibonacciEquation(n)
-    nameArr5 = logicalLayer.demofib_matrix(n)
+    nameArr1 = init.FibonacciD(n)
+    nameArr2 = init.FibonacciDImproment(n)
+    nameArr3 = init.demoFibonacci_Recursion_tool(n)
+    nameArr4 = init.FibonacciEquation(n)
+    nameArr5 = init.demofib_matrix(n)
     res = {
         "status_code": 0,
         "status_msg": "success",
@@ -66,7 +66,7 @@ def fiveMethodsShow():
 # 迭代法求系统环境最大斐波那契数位置接口
 @app.route('/api/iterativeEnvMax', methods=['GET'])
 def iterativeEnvMax():
-    data = logicalLayer.GetFibonacciD()
+    data = init.GetFibonacciD()
     res = {
         "status_code": 0,
         "status_msg": "success",
@@ -79,7 +79,7 @@ def iterativeEnvMax():
 @app.route('/api/recursiveIterationThirty', methods=['GET'])
 def recursiveIterationThirty():
     print('接口1')
-    nameArr1 = logicalLayer.GetMaxFibonacciD()
+    nameArr1 = init.GetMaxFibonacciD()
     print(nameArr1)
     nameArr2 = 0
     print(nameArr2)
@@ -101,7 +101,7 @@ def recursiveIterationThirty2():
     print('接口2')
     nameArr1 = 0
     print(nameArr1)
-    nameArr2 = logicalLayer.thirtyMinFib()
+    nameArr2 = init.thirtyMinFib()
     print(nameArr2)
     res = {
         "status_code": 0,
@@ -119,7 +119,7 @@ def recursiveIterationThirty2():
 # 近似公式结果展示接口
 @app.route('/api/formula', methods=['GET'])
 def formula():
-    data = logicalLayer.GetMaxFibonacci()
+    data = init.GetMaxFibonacci()
     print(data)
     res = {
         "status_code": 0,

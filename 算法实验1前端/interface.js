@@ -178,7 +178,7 @@ function RecursiveIterationThirty_1() {
         async:true,
         success:function (result) {
             var obj = result;
-            document.getElementById("t2").innerHTML = obj.data.nameArr[1].index;
+            document.getElementById("t3").innerHTML = obj.data.nameArr[1].index;
             thirty_time2 = obj.data.nameArr[1].time;
         },
         error:function () {
@@ -188,7 +188,7 @@ function RecursiveIterationThirty_1() {
 }
 
 function RecursiveIterationThirty_2() {
-    document.getElementById("t3").innerHTML = thirty_time1;
+    document.getElementById("t2").innerHTML = thirty_time1;
     document.getElementById("t4").innerHTML = thirty_time2;
 }
 
