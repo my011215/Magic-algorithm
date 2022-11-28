@@ -1,0 +1,161 @@
+*{margin: 0;padding: 0;}  
+body{
+    display: flex;
+	flex-direction: column;
+	min-height: 100vh; 
+    background-color:#CCDBED;
+    width:100%;
+}
+#header{
+    background-color:#ADB8D4;
+    height:7vh;
+    width:100%;
+}
+#p1{
+    position:absolute;
+    line-height: 7vh;
+    font-size: 5vh;
+    left:3vh;
+    font-family:cursive;
+    font-weight:900;
+}
+a{
+    text-decoration: none;
+    color:black;
+}
+#icon1{
+    position:absolute;
+    top:0.5vh;
+    right:1vh;
+}
+#icon2{
+    position:absolute;
+    top:0.5vh;
+    right:8vh;
+    font-size:7vh;
+}
+/*数组box*/
+#input_box{
+    width:80vw;
+    height:20vh;
+    position: absolute;
+    top:15vh;
+    left:10vw;
+}
+.hcqStyle{
+    display:inline-block;
+    font-size:8vh;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight:bold;color:#CCDBED;
+    text-shadow:0 0 1px currentColor,-1px -1px 3px #000000,0 -1px 3px #000000,1px -1px 3px #071E59,1px 0 3px #071E59,1px 1px 3px #071E59,0 1px 3px #000000,-1px 1px 3px #000000,-1px 0 3px #000000;
+    -webkit-filter:url(#diff1);filter:url(#diff1);
+    position: absolute;
+    top:3vh;
+    left:2vw;
+}
+#input_save{
+    position: relative;
+    top:0vh;
+    left:20%;
+    width:80%;
+    height:13vh;
+    border:0.7vh solid transparent;
+    border-image:linear-gradient(45deg,#aed0f4,#649ad8)1;
+    background-color: white;
+    animation: huerotate 6s infinite linear;
+    filter: hue-rotate(360deg);
+    clip-path: inset(0px round 10px);
+    overflow: auto;
+}
+/*状态盒子和结果盒子*/
+.box1{
+    width:20vw;
+    height:45vh;
+}
+#status_table{
+    position: absolute;
+    top:40vh;
+    right:20vw;
+}
+#answer_table{
+    position: absolute;
+    top:40vh;
+    left:20vw;
+}
+/*status——table*/
+#table{
+    width:100%;
+    height:100%;
+    text-align: center;
+    background-color:#ffffff;
+    border-radius: 1vh;
+    border: #CCDBED;
+    font-size:4vh;
+    font-family: "站酷酷黑 Regular";
+}
+.table_left{
+    width:40%;
+    border:0.1vh solid #ffffff;
+    border-radius: 1vh 0vh 0vh 1vh;
+    background-color:#B4CBEE;
+}
+.table_right{
+    border:0.1vh solid #ffffff;
+    border-radius: 0vh 1vh 1vh 0vh;
+    background-color:#B4CBEE;
+}
+/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+    font-family: "站酷酷黑 Regular";font-weight: 400;src: url("./ziti/8oF2YOMpD90M_RZ0u0MMm.woff2"),
+    url("./ziti/8oF2YOMpD90M_RZ0u0MMm.woff");
+    font-display: swap;
+  }
+
+#answer1{
+    position: absolute;
+    width:100%;
+    height:20%;
+    background-color:#B4CBEE;
+    text-align:center;
+    border: none;
+    border-radius:2vh;
+    border:0.5vh solid white;
+}
+#answer1:hover{
+    transform: scale(1.1);
+    width:103%;
+    height:23%;
+    background-color:#B4CBEE;
+    text-align:center;
+    border: none;
+    border-radius:2vh;
+    border:0.5vh solid white;
+    font-size:5vh;
+
+}
+#p2{
+    margin:2vh auto;
+    font-size:4vh;
+    font-family: "站酷酷黑 Regular";
+}
+#answer2{
+    position: absolute;
+    width:100%;
+    height:68%;
+    top:32%;
+    border:0.5vh solid #B4CBEE;
+    border-radius: 2vh;
+    text-align: center;
+    font-size: 10vh;
+}
+#icon3{
+    width: 1em;
+    height: 1em;
+    font-size: 35vh;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+    position: absolute;
+    bottom:13vh;
+    left:22vw;
+}

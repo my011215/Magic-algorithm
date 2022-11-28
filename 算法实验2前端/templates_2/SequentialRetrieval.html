@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>顺序检索</title>
+    <link rel="stylesheet" type="text/css" href="../static_2/SequentialRetrieval.css">
+    <link rel="stylesheet" href="../static_2/font/iconfont.css">
+    <script src="../static_2/font/iconfont.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<script>
+    function send() {
+        var arr = document.getElementById("input_save").textContent;
+        var item = document.getElementById("input_box1").value;
+        $.ajax({
+            url: 'http://127.0.0.1:5000/api2/seqRet',
+            type: 'POST',//发送类型
+            data: JSON.stringify({ 'arr': arr, 'item': item }),
+            contentType: 'application/json',//指定字符编码格式
+            dataType: 'json',//响应数据类型
+            async: true,
+            headers: {
+                name: "ajax"
+            },
+            success: function (result) {//成功的回调
+                var obj = result;
+                var status1 = result.data.haveOrNot;
+                var compareCount = result.data.compareTime;
+                var s;
+                if (status1 == true) {
+                    s = "是";
+                } else { s = "否" }
+                document.getElementById("t2").innerHTML = compareCount;
+                document.getElementById("t1").innerHTML = s;
+
+            },
+            error: function () {//失败的回调
+                //不论是超时还是出错
+                console.log("出错");
+            }
+        })
+    }
+</script>
+<body>
+    <div id="header">
+        <p id="p1">检索算法</p>
+        <a href="../templates/Menu.html"><span class="iconfont icon-shouye1" id="icon1"></span></a>
+        <a href="./SearchMenu.html"><span class="iconfont icon-mulu2" id="icon2"></span></a>
+    </div>
+    <div id="input_box">
+        <p class="hcqStyle">数组:</p>
+        <div id="input_save">
+        </div>
+        <script>
+            var va = localStorage.value;
+            var x = document.getElementById("input_save");
+            x.innerHTML = va;
+            x.style.textAlign = "center";
+            x.style.fontSize = "5vh";
+        </script>
+    </div>
+    <div id="input_element">
+        <p id="p2">请输入要检索的元素：</p>
+        <input type="input" name="" id="input_box1">
+        <button class="custom-btn btn">
+            <p class="hcqStyle4" onclick="send()">确定</p>
+        </button>
+    </div>
+    <div id="table">
+        <table border="1" id="table1">
+            <tr>
+                <th>是否出现</th>
+                <td id="t1"></td>
+            </tr>
+            <tr>
+                <th>关键字比较次数</th>
+                <td id="t2"></td>
+            </tr>
+        </table>
+    </div>
+    <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-jiaoyin"></use>
+    </svg>
+</body>
+</html>

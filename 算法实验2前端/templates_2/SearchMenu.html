@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>判断数组状态</title>
+    <link rel="stylesheet" type="text/css" href="../static_2/SearchMenu.css">
+    <link rel="stylesheet" href="../static_2/font/iconfont.css">
+    <script src="../static_2/font/iconfont.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<script>
+    var arr,arr1,arr2;
+    function Li1() {
+        content_1.style.display = 'block';
+        content_2.style.display = 'none';
+        content_3.style.display = 'none';
+    }
+    function Li2() {
+        content_2.style.display = 'block';
+        content_1.style.display = 'none';
+        content_3.style.display = 'none';
+    }
+    function Li3() {
+        content_3.style.display = 'block';
+        content_2.style.display = 'none';
+        content_1.style.display = 'none';
+    }
+    function send1() {
+        var a = $("#select1").find("option:selected").val();
+        var n = document.getElementById("input1_1").value;
+        if (a == 1) {
+            $.ajax({
+                url: 'http://127.0.0.1:5000/api2/searchMenu',
+                type: 'POST',//发送类型
+                dataType: 'json',//响应数据类型
+                data:JSON.stringify({arrLen:n}),
+                contentType: 'application/json',//指定字符编码格式
+                async: true,
+                headers: {
+                    name: "ajax"
+                },
+                success: function (result) {//成功的回调
+                    var obj = result;
+                    arr = result.data.arr;
+                },
+                error: function () {//失败的回调
+                    //不论是超时还是出错
+                    console.log("出错");
+                }
+            })
+        }
+    }
+    function send2(){
+        var a = $("#select2").find("option:selected").val();
+        var n = document.getElementById("input2_1").value;
+        if (a != 0) {
+            $.ajax({
+                url: 'http://127.0.0.1:5000/api2/createMountainArr',
+                type: 'POST',//发送类型
+                dataType: 'json',//响应数据类型
+                data:JSON.stringify({'pattern':a,'arrLen':n}),
+                contentType: 'application/json',//指定字符编码格式
+                async: true,
+                headers: {
+                    name: "ajax"
+                },
+                success: function (result) {//成功的回调
+                    var obj = result;
+                    arr1 = result.data.arr;
+                },
+                error: function () {//失败的回调
+                    //不论是超时还是出错
+                    console.log("出错");
+                }
+            })
+        }
+    }
+    function send3(){
+        var a = $("#select3").find("option:selected").val();
+        var n = document.getElementById("input3_1").value;
+        alert(a)
+        if (a == 1) {
+            $.ajax({
+                url: 'http://127.0.0.1:5000/api2/disorderArr',
+                type: 'POST',//发送类型
+                dataType: 'json',//响应数据类型
+                data:JSON.stringify({'arrLen':n}),
+                contentType: 'application/json',//指定字符编码格式
+                async: true,
+                headers: {
+                    name: "ajax"
+                },
+                success: function (result) {//成功的回调
+                    var obj = result;
+                    arr2 = result.data.arr;
+                },
+                error: function () {//失败的回调
+                    //不论是超时还是出错
+                    console.log("出错");
+                }
+            })
+        }
+    }
+    function jump1_1() {
+        var a = $("#select1").find("option:selected").val();
+        if (window.localStorage) {
+            if (a == 0) {
+                localStorage.value = document.getElementById("input1_1").value;
+            } else {
+                localStorage.value = arr;
+            }
+            location.href = "JudgementStatus.html";
+        } else {
+            alert("不支持！");
+        }
+    }
+    function jump1_2() {
+        var a = $("#select1").find("option:selected").val();
+        if (window.localStorage) {
+            if (a == 0) {
+                localStorage.value = document.getElementById("input1_1").value;
+            } else {
+                localStorage.value = arr;
+            }
+            location.href = "SequentialRetrieval.html";
+        } else {
+            alert("不支持！");
+        }
+    }
+    function jump1_3() {
+        var a = $("#select1").find("option:selected").val();
+        if (window.localStorage) {
+            if (a == 0) {
+                localStorage.value = document.getElementById("input1_1").value;
+            } else {
+                localStorage.value = arr;
+            }
+            location.href = "FourMethods.html";
+        } else {
+            alert("不支持！");
+        }
+    }
+    function jump2() {
+        var a = $("#select2").find("option:selected").val();
+        if (window.localStorage) {
+            if (a == 0) {
+                localStorage.value = document.getElementById("input2_1").value;
+            } else {
+                localStorage.value = arr1;
+            }
+            location.href = "TwoRetrievalMethods.html";
+        } else {
+            alert("不支持！");
+        }
+    }
+    function jump3() {
+        var a = $("#select3").find("option:selected").val();
+        if (window.localStorage) {
+            if (a == 0) {
+                localStorage.value = document.getElementById("input3_1").value;
+            } else {
+                localStorage.value = arr2;
+            }
+            location.href = "ThreeMethods.html";
+        } else {
+            alert("不支持！");
+        }
+    }
+</script>
+<body>
+    <div id="header">
+        <p id="p1">检索算法</p>
+        <a href="../templates/Menu.html"><span class="iconfont icon-shouye1" id="icon1"></span></a>
+    </div>
+    <div id="menu">
+        <ul id="ul1">
+            <li id="li1" onclick="Li1()">
+                <p class="hcqStyle">输入/生成数组</p>
+            </li>
+            <li id="li2" onclick="Li2()">
+                <p class="hcqStyle">先升(降)后降(升)数组</p>
+            </li>
+            <li id="li3" onclick="Li3()">
+                <p class="hcqStyle">无序数组</p>
+            </li>
+        </ul>
+        <svg id="icon2" aria-hidden="true">
+            <use xlink:href="#icon-haitun1"></use>
+        </svg>
+    </div>
+    <div class="content" id="content_1">
+        <div class="input_0">
+            <p class="c_p">请输入一个数组或者随机数组的长度:</p>
+        </div>
+        <select name="select1" class="select" id="select1">
+            <option value="0">用户输入</option>
+            <option value="1">自动生成</option>
+        </select>
+        <input type="text" name="" class="input" id="input1_1">
+        <button class="custom-btn btn" type="button" onclick="send1()" id="button1_1">
+            <!--页面一的确定-->
+            <p class="hcqStyle4">确定</p>
+        </button>
+        <div class="three_menu" id="menu_1" onclick="jump1_1()">
+            <span class="iconfont icon-041siyecao" id="icon_three1"></span>
+            <div class="word">
+                <p>判断数组状态</p>
+            </div>
+        </div>
+        <div class="three_menu" id="menu_2" onclick="jump1_2()">
+            <span class="iconfont icon-hanhan-01-01" id="icon_three2"></span>
+            <div class="word">
+                <p>顺序检索某元素</p>
+            </div>
+        </div>
+        <div class="three_menu" id="menu_3" onclick="jump1_3()">
+            <span class="iconfont icon-zhichiduozhongshujuleixing" id="icon_three3"></span>
+            <div class="word">
+                <p>多种方法查找某元素</p>
+            </div>
+        </div>
+    </div>
+    <div class="content" id="content_2">
+        <div class="input_0">
+            <p class="c_p">请输入一个先升(降)后降(升)数组或数组的长度：</p>
+        </div>
+        <select name="select2" class="select" id="select2">
+            <option value="0">用户输入</option>
+            <option value="1">先升后降</option>
+            <option value="2">先降后升</option>
+        </select>
+        <input type="text" name="" class="input" id="input2_1">
+        <button class="custom-btn btn" type="button" onclick="send2()" id="button2_1">
+            <p class="hcqStyle4">确定</p>
+        </button>
+        <div class="button_2">
+            <button class="custom-btn1 btn-3" id="button1">
+                <span>
+                    <p class="hcqStyle3" onclick="jump2()">开始检索</p>
+                </span>
+            </button>
+        </div>
+        <svg id="icon3" aria-hidden="true">
+            <use xlink:href="#icon-zhiwu2"></use>
+        </svg>
+    </div>
+    <div class="content" id="content_3">
+        <div class="input_0">
+            <p class="c_p">请输入一个无序数组或数组的长度：</p>
+        </div>
+        <input type="text" name="" class="input" id="input3_1">
+        <select name="select3" class="select" id="select3">
+            <option value="0">用户输入</option>
+            <option value="1">自动生成</option>
+        </select>
+        <button class="custom-btn btn" type="button" onclick="send3()" id="button3_1">
+            <p class="hcqStyle4">确定</p>
+        </button>
+        <div class="button_2">
+            <button class="custom-btn1 btn-3" id="button1" onclick="jump3()">
+                <span>
+                    <p class="hcqStyle3">开始查找</p>
+                </span>
+            </button>
+        </div>
+        <svg id="icon4" aria-hidden="true">
+            <use xlink:href="#icon-xiaochuan"></use>
+        </svg>
+    </div>
+</body>
+</html>
