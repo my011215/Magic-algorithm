@@ -14,11 +14,11 @@ CORS(app, supports_credentials=True)  # 配置全局路由
 
 
 # /api2/searchMenu
-@app.route('/api2/searchMenu', methods = ['POST'])
+@app.route('/api2/searchMenu', methods=['POST'])
 def searchMenu():
     getJson = request.json  # 获取 JOSN 数据
-    # 这里还要有一个随机数
-    arr = init.creatArr(int(getJson['arrLen']), random.randint(0, 5))
+    # 这里还要有一个随机数，每个都是平均的
+    arr = logical.creatArr(int(getJson['arrLen']), random.randint(0, 5))
     res = {
         "status_code": 0,
         "status_msg": "success",
@@ -30,11 +30,26 @@ def searchMenu():
 
 
 # /api2/disorderArr
-@app.route('/api2/disorderArr', methods = ['POST'])
+@app.route('/api2/disorderArr', methods=['POST'])
 def disorderArr():
     getJson = request.json  # 获取 JOSN 数据
-    # 这里还要有一个随机数
-    arr = init.creatArr(int(getJson['arrLen']), 0)
+    arr = logical.creatArr(int(getJson['arrLen']), 0)
+    res = {
+        "status_code": 0,
+        "status_msg": "success",
+        "data": {
+            'arr': arr
+        }
+    }
+    return jsonify(res)
+
+@app.route('/api2/createMountainArr', methods=['POST'])
+def createMountainArr():
+    getJson = request.json  # 获取 JOSN 数据
+    if int(getJson['pattern']) == 0:
+        arr = logical.creatArr(int(getJson['arrLen']), 3)
+    else:
+        arr = logical.creatArr(int(getJson['arrLen']), 4)
     res = {
         "status_code": 0,
         "status_msg": "success",
@@ -46,20 +61,12 @@ def disorderArr():
 
 
 # /api2/judgementStatus
-@app.route('/api2/judgementStatus', methods = ['POST'])
+@app.route('/api2/judgementStatus', methods=['POST'])
 def judgementStatus():
-    # s = getJson["arr"]
-    # arr = s.split(',')
-    # arr = [int(x) for x in arr]
     getJson = request.json  # 获取 JOSN 数据
-    # # 这里还要有一个随机数
-    s = getJson["arr"]
-    # arr = s.split(',')
-    # arr = [int(x) for x in arr]
-    # s = "1,2,3,4,5"
-    arr = s.split(',')
-    arr = [int(x) for x in arr]
-    status = init.judgeArr(arr)
+    # 这里还要有一个随机数
+    arr = list(map(int, getJson['arr'].split(",")))
+    status = logical.judgeArr(arr)
     res = {
         "status_code": 0,
         "status_msg": "success",
@@ -71,14 +78,13 @@ def judgementStatus():
 
 
 # /api2/seqRet
-@app.route('/api2/seqRet', methods = ['POST'])
+@app.route('/api2/seqRet', methods=['POST'])
 def seqRet():
     getJson = request.json  # 获取 JOSN 数据
     # 这里还要有一个随机数
     arr = list(map(int, getJson['arr'].split(",")))
 
-    res, count = init.sequentialSearch(arr, int(getJson['item']))
-    print(res)
+    res, count = logical.sequentialSearch(arr, int(getJson['item']))
     res = {
         "status_code": 0,
         "status_msg": "success",
@@ -89,32 +95,16 @@ def seqRet():
     }
     return jsonify(res)
 
-@app.route('/api2/createMountainArr', methods =['POST'])
-def createMountainArr():
-    getJson = request.json  # 获取 JOSN 数据
-    if int(getJson['pattern']) == 0:
-        arr = init.creatArr(int(getJson['arrLen']), 3)
-    else:
-        arr = init.creatArr(int(getJson['arrLen']), 4)
-    res = {
-        "status_code": 0,
-        "status_msg": "success",
-        "data": {
-            'arr': arr
-        }
-    }
-    return jsonify(res)
 
 # /api2/ThreeMethods
-@app.route('/api2/ThreeMethods', methods = ['POST'])
+@app.route('/api2/ThreeMethods', methods=['POST'])
 def ThreeMethods():
-    # getJson = request.json  # 获取 JOSN 数据int(getJson['k']
+    getJson = request.json  # 获取 JOSN 数据
     # 这里还要有一个随机数
-    # arr = list(map(int, getJson['arr'].split(",")))
-    arr = [1,2,3,4,9,10,7,6]
-    minItem0, count0 = init.threeMethodFindKMin(arr, 4, 0)
-    minItem1, count1 = init.threeMethodFindKMin(arr, 4, 1)
-    minItem2, count2 = init.threeMethodFindKMin(arr, 4, 2)
+    arr = list(map(int, getJson['arr'].split(",")))
+    minItem0, count0 = logical.threeMethodFindKMin(arr, int(getJson['k']), 0)
+    minItem1, count1 = logical.threeMethodFindKMin(arr, int(getJson['k']), 1)
+    minItem2, count2 = logical.threeMethodFindKMin(arr, int(getJson['k']), 2)
     res = {
         "status_code": 0,
         "status_msg": "success",
