@@ -1,6 +1,7 @@
 import random
 import sys
 
+
 '''
 判断数组是否有序？
 参数：
@@ -119,13 +120,13 @@ def creatArr(arrLen: int, pattern: int) -> list:
         # 随机生成首元素，后面的元素依次递增随机值
         arr.append(random.randint(0, arrLen))
         for i in range(1, arrLen):
-            arr.append(arr[i - 1] + random.randint(0, 10))
+            arr.append(arr[i - 1] + random.randint(1, 10))
     elif pattern == 2:
         # 随机生成首元素，后面的元素依次递增随机值
         arr.append(random.randint(0, arrLen))
         for i in range(1, arrLen):
             # 负数也是整数（doge
-            arr.append(arr[i - 1] - random.randint(0, 10))
+            arr.append(arr[i - 1] - random.randint(1, 10))
     elif pattern == 3:
         # 先升后降
         # 发生大小变化的位置，必须加一，不然有可能是从第一个数或者最后一个数进行转变
@@ -134,9 +135,9 @@ def creatArr(arrLen: int, pattern: int) -> list:
         # 两个for循环，一个for前面的部分，另一个for后面的部分
         for i in range(1, arrLen):
             if i <= changeIndex:
-                arr.append(arr[i - 1] + random.randint(0, 10))
+                arr.append(arr[i - 1] + random.randint(1, 10))
             else:
-                arr.append(arr[i - 1] - random.randint(0, 10))
+                arr.append(arr[i - 1] - random.randint(1, 10))
     elif pattern == 4:
         # 先降后升
         # 发生大小变化的位置，必须加一，不然有可能是从第一个数或者最后一个数进行转变
@@ -145,9 +146,9 @@ def creatArr(arrLen: int, pattern: int) -> list:
         # 两个for循环，一个for前面的部分，另一个for后面的部分
         for i in range(1, arrLen):
             if i <= changeIndex:
-                arr.append(arr[i - 1] - random.randint(0, 10))
+                arr.append(arr[i - 1] - random.randint(1, 10))
             else:
-                arr.append(arr[i - 1] + random.randint(0, 10))
+                arr.append(arr[i - 1] + random.randint(1, 10))
     return arr
 
 
@@ -176,38 +177,30 @@ def sequentialSearch(arr: list, item: int) -> (bool, int):
             return True, count
     return False, count
 
-
 partitionCount = 0
 
 
-def partition(nums, left, right):
+def lomutoPartition(a: list, l: int, r: int) -> int:
     global partitionCount
-    pivot = nums[left]  # 初始化一个待比较数据
-    i, j = left, right
-    while i < j:
-        while i < j and nums[j] >= pivot:  # 从后往前查找，直到找到一个比pivot更小的数
-            j -= 1
-            partitionCount += 1
-        nums[i] = nums[j]  # 将更小的数放入左边
-        while i < j and nums[i] <= pivot:  # 从前往后找，直到找到一个比pivot更大的数
-            i += 1
-            partitionCount += 1
-        nums[j] = nums[i]  # 将更大的数放入右边
-    # 循环结束，i与j相等
-    nums[i] = pivot  # 待比较数据放入最终位置
-    return i  # 返回待比较数据最终位置
+    pivot = a[l]
+    j = l
+    for i in range(l + 1, r + 1):
+        partitionCount += 1
+        if a[i] < pivot:
+            j += 1
+            a[j], a[i] = a[i], a[j]
+    a[l], a[j] = a[j], a[l]
+    return j
 
 
-def topk_split(nums, k, left, right):
-    # 寻找到第k个数停止递归，使得nums数组中index左边是前k个小的数，index右边是后面n-k个大的数
-    if left < right:
-        index = partition(nums, left, right)
-        if index == k:
-            return
-        elif index < k:
-            topk_split(nums, k, index + 1, right)
-        else:
-            topk_split(nums, k, left, index - 1)
+def quickSelect(a: int, l: int, r: int, k: int) -> int:
+    s = lomutoPartition(a, l, r)
+    if s == l+k-1:
+        return a[s]
+    elif s > l+k-1:
+        return quickSelect(a, l, s-1, k)
+    else:
+        return quickSelect(a, s+1, r, k-(s-l+1))
 
 
 '''
@@ -226,28 +219,28 @@ def topk_split(nums, k, left, right):
 
 
 def threeMethodFindKMin(arr: list, k: int, state: int) -> (int, int):
-    minItem = sys.maxsize
     countTime = 0
+    tmp = arr.copy()
     # 蛮力法
     if state == 0:
-        for i in range(0, k - 1):
-            for j in range(0, len(arr)):
+        for i in range(0, k):
+            minItem = sys.maxsize
+            for j in range(0, len(tmp)):
                 countTime += 1
-                if arr[j] < minItem:
-                    minItem = arr[j]
-            arr.remove(minItem)
-        minItem = minItem(arr)
+                if tmp[j] < minItem:
+                    minItem = tmp[j]
+            tmp.remove(minItem)
     elif state == 1:
-        arr.sort(reverse=False)
+        tmp.sort(reverse=False)
         minItem = arr[k - 1]
         countTime = 1
     elif state == 2:
-        topk_split(arr, k, 0, len(arr) - 1)
-        minItem = arr[k]
+        minItem = quickSelect(tmp, 0, len(tmp) - 1, k)
         global partitionCount
         countTime = partitionCount
         partitionCount = 0
     return minItem, countTime
+
 
 # 顺序查找
 def sequential_search(lis, key, s):
