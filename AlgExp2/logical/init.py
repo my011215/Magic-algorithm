@@ -232,7 +232,7 @@ def threeMethodFindKMin(arr: list, k: int, state: int) -> (int, int):
             tmp.remove(minItem)
     elif state == 1:
         tmp.sort(reverse=False)
-        minItem = arr[k - 1]
+        minItem = tmp[k - 1]
         countTime = 1
     elif state == 2:
         minItem = quickSelect(tmp, 0, len(tmp) - 1, k)
