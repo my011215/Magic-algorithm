@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>判断数组状态</title>
@@ -54,7 +53,7 @@
     function send2(){
         var a = $("#select2").find("option:selected").val();
         var n = document.getElementById("input2_1").value;
-        if (a != 0) {
+        if (a != 2) {
             $.ajax({
                 url: 'http://127.0.0.1:5000/api2/createMountainArr',
                 type: 'POST',//发送类型
@@ -79,7 +78,6 @@
     function send3(){
         var a = $("#select3").find("option:selected").val();
         var n = document.getElementById("input3_1").value;
-        alert(a)
         if (a == 1) {
             $.ajax({
                 url: 'http://127.0.0.1:5000/api2/disorderArr',
@@ -144,7 +142,7 @@
     function jump2() {
         var a = $("#select2").find("option:selected").val();
         if (window.localStorage) {
-            if (a == 0) {
+            if (a == 2) {
                 localStorage.value = document.getElementById("input2_1").value;
             } else {
                 localStorage.value = arr1;
@@ -226,9 +224,9 @@
             <p class="c_p">请输入一个先升(降)后降(升)数组或数组的长度：</p>
         </div>
         <select name="select2" class="select" id="select2">
-            <option value="0">用户输入</option>
-            <option value="1">先升后降</option>
-            <option value="2">先降后升</option>
+            <option value="2">用户输入</option>
+            <option value="0">先升后降</option>
+            <option value="1">先降后升</option>
         </select>
         <input type="text" name="" class="input" id="input2_1">
         <button class="custom-btn btn" type="button" onclick="send2()" id="button2_1">
