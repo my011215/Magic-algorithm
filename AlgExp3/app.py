@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from logicalLayer import bag
+from logicalLayer import *
 from flask_cors import CORS  # 导入CORS库
 import numpy as np
 import sys
