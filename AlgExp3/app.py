@@ -61,6 +61,58 @@ def Greedy01():
     }
     return jsonify(res)
 
+@app.route('/api3/Brute01', methods=['POST'])
+def searchMenu():
+    getJson = request.json  # 获取 JOSN 数据
+    # 这里还要有一个随机数，每个都是平均的
+    w = int(getJson["bagCap"])
+    i = int(getJson["bagNum"])
+    eachWeight = getJson["eachWeight"]
+    weight = list(map(int, eachWeight.split()))
+    eachVal = getJson["eachVal"]
+    value = list(map(int, eachVal.split()))
+    res = {
+        "status_code": 0,
+        "status_msg": "success",
+        "data": Logical.backpack(i, w, weight, value)
+    }
+    return jsonify(res)
+
+
+@app.route('/api3/Dynamic01', methods=['POST'])
+def searchMenu():
+    getJson = request.json  # 获取 JOSN 数据
+    # 这里还要有一个随机数，每个都是平均的
+    w = int(getJson["bagCap"])
+    i = int(getJson["bagNum"])
+    eachWeight = getJson["eachWeight"]
+    weight = list(map(int, eachWeight.split()))
+    eachVal = getJson["eachVal"]
+    value = list(map(int, eachVal.split()))
+    res = {
+        "status_code": 0,
+        "status_msg": "success",
+        "data": Logical.solve(i, w, weight, value)
+    }
+    return jsonify(res)
+
+@app.route('/api3/ImproveDy', methods=['POST'])
+def searchMenu():
+    getJson = request.json  # 获取 JOSN 数据
+    # 这里还要有一个随机数，每个都是平均的
+    w = int(getJson["bagCap"])
+    i = int(getJson["bagNum"])
+    eachWeight = getJson["eachWeight"]
+    weight = list(map(int, eachWeight.split()))
+    eachVal = getJson["eachVal"]
+    value = list(map(int, eachVal.split()))
+    res = {
+        "status_code": 0,
+        "status_msg": "success",
+        "data": Logical.solve2(i, w, weight, value)
+    }
+    return jsonify(res)
+
 
 if __name__ == '__main__':
     app.run()
