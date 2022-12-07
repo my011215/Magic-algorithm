@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>背包菜单界面</title>
+    <link rel="stylesheet" type="text/css" href="../static_3/BagMenu.css">
+    <link rel="stylesheet" type="text/css" href="../static_3/font_3/iconfont.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../static_3/font_3/iconfont.js"></script>
+</head>
+<script>
+    function jump1() {
+        var total_weight = document.getElementById("input_bag").value;
+        var count = document.getElementById("input_box").value;
+        var every_weight = document.getElementById("input_weight").value;
+        var every_price = document.getElementById("input_price").value;
+        window.location.href = "GreedyFraction.html?total_weight=" + total_weight + "&count=" + count + "&every_weight=" + every_weight+"&every_price="+every_price;
+    }
+    function jump2() {
+        var total_weight = document.getElementById("input_bag").value;
+        var count = document.getElementById("input_box").value;
+        var every_weight = document.getElementById("input_weight").value;
+        var every_price = document.getElementById("input_price").value;
+        window.location.href = "Greedy0_1.html?total_weight=" + total_weight + "&count=" + count + "&every_weight=" + every_weight+"&every_price="+every_price;
+    }
+    function jump3() {
+        var total_weight = document.getElementById("input_bag").value;
+        var count = document.getElementById("input_box").value;
+        var every_weight = document.getElementById("input_weight").value;
+        var every_price = document.getElementById("input_price").value;
+        window.location.href = "Brute0_1.html?total_weight=" + total_weight + "&count=" + count + "&every_weight=" + every_weight+"&every_price="+every_price;
+    }
+    function jump4() {
+        var total_weight = document.getElementById("input_bag").value;
+        var count = document.getElementById("input_box").value;
+        var every_weight = document.getElementById("input_weight").value;
+        var every_price = document.getElementById("input_price").value;
+        window.location.href = "Dynamic0_1.html?total_weight=" + total_weight + "&count=" + count + "&every_weight=" + every_weight+"&every_price="+every_price;
+    }
+    function jump5() {
+        var total_weight = document.getElementById("input_bag").value;
+        var count = document.getElementById("input_box").value;
+        var every_weight = document.getElementById("input_weight").value;
+        var every_price = document.getElementById("input_price").value;
+        window.location.href = "ImproveDynamic.html?total_weight=" + total_weight + "&count=" + count + "&every_weight=" + every_weight+"&every_price="+every_price;
+    }
+</script>
+
+<body>
+    <div id="header">
+        <p id="p1">背包问题</p>
+        <a href="../templates/Menu.html"><span class="iconfont icon-zhuye" id="icon1"></span></a>
+    </div>
+    <div id="in_1">
+        <svg class="icon" aria-hidden="true" id="icon_bag">
+            <use xlink:href="#icon-shubao2"></use>
+        </svg>
+        <p class="hcqStyle" id="p2">背包容量:</p>
+        <input type="input" name="" id="input_bag">
+        <svg class="icon" aria-hidden="true" id="icon_box">
+            <use xlink:href="#icon-huowu-kaixin"></use>
+        </svg>
+        <p class="hcqStyle" id="p3">物品个数:</p>
+        <input type="input" name="" id="input_box">
+    </div>
+    <div id="in_2">
+        <p class="hcqStyle" id="p4">每个物体的重量:</p>
+        <input type="input" name="" id="input_weight">
+        <svg class="icon" aria-hidden="true" id="icon_cheng">
+            <use xlink:href="#icon-tiancheng"></use>
+        </svg>
+    </div>
+    <div id="in_3">
+        <p class="hcqStyle" id="p5">每个物体的价值:</p>
+        <input type="input" name="" id="input_price">
+        <button class="custom-btn btn" type="button" onclick="">
+            <p class="hcqStyle4">确定</p>
+        </button>
+    </div>
+    <div class="menu" id="menu_1" onclick="jump1()">
+        <svg class="icon_menu" aria-hidden="true">
+            <use xlink:href="#icon-icon-test5"></use>
+        </svg>
+        <div class="p_m">
+            <p class="p_menu">贪心法求解分数背包问题</p>
+        </div>
+    </div>
+    <div class="menu" id="menu_2" onclick="jump2()">
+        <svg class="icon_menu" aria-hidden="true">
+            <use xlink:href="#icon-1"></use>
+        </svg>
+        <div class="p_m">
+            <p class="p_menu">贪心法求解0-1背包问题</p>
+        </div>
+    </div>
+    <div class="menu" id="menu_3" onclick="jump3()">
+        <svg class="icon_menu" aria-hidden="true">
+            <use xlink:href="#icon-shouhuiyueliang"></use>
+        </svg>
+        <div class="p_m">
+            <p class="p_menu">蛮力法求解0-1背包问题</p>
+        </div>
+    </div>
+    <div class="menu" id="menu_4" onclick="jump4()">
+        <svg class="icon_menu" aria-hidden="true">
+            <use xlink:href="#icon-xingqiu-"></use>
+        </svg>
+        <div class="p_m">
+            <p class="p_menu">动态规划求解0-1背包问题</p>
+        </div>
+    </div>
+    <div class="menu" id="menu_5" onclick="jump5()">
+        <svg class="icon_menu" aria-hidden="true">
+            <use xlink:href="#icon-yinhexi"></use>
+        </svg>
+        <div class="p_m">
+            <p class="p_menu">记忆功能改进动态规划</p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>判断数组状态</title>
+    <link rel="stylesheet" type="text/css" href="../static_2/JudgementStatus.css">
+    <link rel="stylesheet" href="../static_2/font/iconfont.css">
+    <script src="../static_2/font/iconfont.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<script>
+    var status;
+    function judge() {
+        var arr = document.getElementById("input_save").textContent;
+        $.ajax({
+            url: 'http://127.0.0.1:5000/api2/judgementStatus',
+            type: 'POST',//发送类型
+            data: JSON.stringify({'arr': arr}),
+            contentType: 'application/json',//指定字符编码格式
+            dataType: 'json',//响应数据类型
+            async: true,
+            headers: {
+                name: "ajax"
+            },
+            success: function (result) {//成功的回调
+                alert(result)
+                var obj = result;
+                status = result.data.status + 1;   //确定一下返回的是不是int型
+                var tab = document.getElementById("table"); //找到这个表格
+                var rows = tab.rows; //取得这个table下的所有行
+                var cell = rows[status];
+                cell.style.color = 'red'
+            },
+            error: function () {//失败的回调
+                //不论是超时还是出错
+                console.log("出错");
+            }
+        })
+    }
+</script>
+<body>
+    <div id="header">
+        <p id="p1">检索算法</p>
+        <a href="../templates/Menu.html"><span class="iconfont icon-shouye1" id="icon1"></span></a>
+        <a href="./SearchMenu.html"><span class="iconfont icon-mulu2" id="icon2"></span></a>
+    </div>
+    <div id="input_box">
+        <p class="hcqStyle">数组:</p>
+        <div id="input_save">
+        </div>
+        <script>
+            var va = localStorage.value;
+            var x = document.getElementById("input_save");
+            x.innerHTML = va;
+            x.style.textAlign = "center";
+            x.style.fontSize = "5vh";
+        </script>
+    </div>
+    <div class="box1" id="status_table">
+        <table border="1" id="table">
+            <tr>
+                <th class="table_left">状态码</th>
+                <th class="table_right">状态</th>
+            </tr>
+            <tr>
+                <td class="table_left">0</td>
+                <td class="table_right">未排序</td>
+            </tr>
+            <tr>
+                <td class="table_left">1</td>
+                <td class="table_right">升序</td>
+            </tr>
+            <tr>
+                <td class="table_left">2</td>
+                <td class="table_right">降序</td>
+            </tr>
+            <tr>
+                <td class="table_left">3</td>
+                <td class="table_right">先升后降</td>
+            </tr>
+            <tr>
+                <td class="table_left">4</td>
+                <td class="table_right">先降后升</td>
+            </tr>
+        </table>
+    </div>
+    <div class="box1" id="answer_table" onclick="judge()">
+        <button id="answer1">
+            <p id="p2">判断状态</p>
+        </button>
+    </div>
+    <svg id="icon3" aria-hidden="true">
+        <use xlink:href="#icon-zhiwu1"></use>
+    </svg>
+</body>
+
+</html>

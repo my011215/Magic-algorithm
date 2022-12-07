@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>三种无序方法</title>
+    <link rel="stylesheet" type="text/css" href="../static_2/ThreeMethods.css">
+    <link rel="stylesheet" href="../static_2/font/iconfont.css">
+    <script src="../static_2/font/iconfont.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<script>
+    function send() {
+        var arr = document.getElementById("input_save").textContent;
+        var k = document.getElementById("input_box1").value;
+        $.ajax({
+            url: 'http://127.0.0.1:5000/api2/ThreeMethods',
+            type: 'POST',//发送类型
+            data: JSON.stringify({ 'arr': arr, 'k': k }),
+            contentType: 'application/json',//指定字符编码格式
+            dataType: 'json',//响应数据类型
+            async: true,
+            headers: {
+                name: "ajax"
+            },
+            success: function (result) {//成功的回调
+                var obj = result;
+                var method1_kNum = obj.data.method1.kNum;
+                var method1_compareTime = obj.data.method1.compareTime;
+                var method2_kNum = obj.data.method2.kNum;
+                var method2_compareTime = obj.data.method2.compareTime;
+                var method3_kNum = obj.data.method3.kNum;
+                var method3_compareTime = obj.data.method3.compareTime;
+                document.getElementById("t1").innerHTML = method1_kNum;
+                document.getElementById("t2").innerHTML = method2_kNum;
+                document.getElementById("t3").innerHTML = method3_kNum;
+                document.getElementById("t4").innerHTML = method1_compareTime;
+                document.getElementById("t5").innerHTML = method2_compareTime;
+                document.getElementById("th34").innerHTML = method3_compareTime;
+            },
+            error: function () {//失败的回调
+                //不论是超时还是出错
+                console.log("出错");
+            }
+        })
+    }
+</script>
+
+<body>
+    <div id="header">
+        <p id="p1">检索算法</p>
+        <a href="../templates/Menu.html"><span class="iconfont icon-shouye1" id="icon1"></span></a>
+        <a href="./SearchMenu.html"><span class="iconfont icon-mulu2" id="icon2"></span></a>
+    </div>
+    <div id="input_box">
+        <p class="hcqStyle">数组:</p>
+        <div id="input_save">
+        </div>
+        <script>
+            var va = localStorage.value;
+            var x = document.getElementById("input_save");
+            x.innerHTML = va;
+            x.style.textAlign = "center";
+            x.style.fontSize = "5vh";
+        </script>
+    </div>
+    <div id="input_element">
+        <p id="p2">请输入k的值:</p>
+        <input type="input" name="" id="input_box1">
+        <button class="custom-btn btn" onclick="send()">
+            <p class="hcqStyle4">确定</p>
+        </button>
+    </div>
+    <div id="table">
+        <table border="0" id="table1">
+            <tr>
+                <th id="th00"><span class="iconfont icon-shipin-shengxian-yu"></span></th>
+                <th>蛮力法</th>
+                <th>预排序</th>
+                <th id="th04">减可变规模</th>
+            </tr>
+            <tr>
+                <th>第k个最小元素</th>
+                <td id="t1"></td>
+                <td id="t2"></td>
+                <td id="t3"></td>
+            </tr>
+            <tr>
+                <th id="th30">关键字比较次数</th>
+                <td id="t4"></td>
+                <td id="t5"></td>
+                <td id="th34"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

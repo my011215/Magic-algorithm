@@ -1,7 +1,4 @@
-from flask import Flask, jsonify, request
 import numpy as np
-from flask_cors import CORS  # 导入CORS库
-import sys
 
 def get_bag_information():
     option = input('是否选择使用默认数据（Y/N）: ')

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>贪心法求解0-1背包问题</title>
+    <link rel="stylesheet" type="text/css" href="../static_3/Greedy0_1.css">
+    <link rel="stylesheet" type="text/css" href="../static_3/font_3/iconfont.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../static_3/font_3/iconfont.js"></script>
+</head>
+<script>
+    var total_weight;
+    var count;
+    var every_wieght;
+    var every_price;
+    manyValues();
+    function manyValues() {
+        var url = window.location.search;
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            var key = new Array(strs.length);
+            var value = new Array(strs.length);
+            for (i = 0; i < strs.length; i++) {
+                key[i] = strs[i].split("=")[0]
+                value[i] = unescape(strs[i].split("=")[1]);
+            }
+        }
+        total_weight = value[0];
+        count = value[1];
+        every_weight = value[2];
+        every_price = value[3];
+    }
+    var x = new Array();
+    var y = new Array();
+    var str = '';
+    var str0 = '';
+    var best_weight = 0;
+    var best_value = 0;
+    function send() {
+        $.ajax({
+            url: 'http://127.0.0.1:5000/api3/Greedy01',
+            type: 'POST',//发送类型
+            data: JSON.stringify({ 'bagCap': total_weight, 'bagNum': count, 'eachWeight': every_weight, 'eachVal': every_price }),
+            contentType: 'application/json',//指定字符编码格式
+            dataType: 'json',//响应数据类型
+            async: true,
+            headers: {
+                name: "ajax"
+            },
+            success: function (result) {//成功的回调
+                var obj = result;
+                y = obj.data.value;
+                x = obj.data.weight;
+            },
+            error: function () {//失败的回调
+                //不论是超时还是出错
+                console.log("出错");
+            }
+        })
+    }
+    function best() {
+        for (i = 0; i < x.length; i++) {
+            best_weight = best_weight + x[i];
+            best_value = best_value + y[i];
+            str = str + '(' + x[i] + ',' + y[i] + ')\n';
+            str0 = '（总重量，总价值）\n(' + best_weight + ',' + best_value + ')\n' + '(重量，价值)\n' + str;
+        }
+        document.getElementById("text1").value = str0;
+    }
+    function opposite(){
+        document.getElementById("text3").value='贪重量反例\n物品重量:10 20 30\n物品价值:60 100 120\n背包容量:50\n贪心法近似解[（10，60），（20，100），（0，0）]\n贪心法近似解总价值:160\n最优解[（20，100），（30，120），（0，0）]\n最优解总价值：220';  //写反例
+    }
+</script>
+<body>
+    <div id="header">
+        <p id="p1">背包问题</p>
+        <a href="../templates/Menu.html"><span class="iconfont icon-zhuye" id="icon1"></span></a>
+        <a href="./BagMenu.html"><span class="iconfont icon-mulucaiji" id="icon2"></span></a>
+    </div>
+    <div class="box" id="box1">
+        <div class="word">
+            <p class="p">贪心法求解0-1背包问题</p>
+        </div>
+        <button class="custom-btn btn" type="button"  onclick="send()"><p class="hcqStyle4">确定</p></button>
+    </div>
+    <div class="box_answer" id="box_solution">
+        <div class="p_answer" onclick="best()">
+            <p class="p_as">近似解</p>
+        </div>
+        <textarea class="form_result" readonly="readonly"id="text1"></textarea>
+    </div>
+    <div class="box_answer" id="box_evidence" onclick="opposite()">
+        <div class="p_answer">
+            <p class="p_as">反例</p>
+        </div>
+        <textarea class="form_result" readonly="readonly" id="text3"></textarea>
+    </div>
+    <svg class="icon" aria-hidden="true" id="icon3">
+        <use xlink:href="#icon-huoxinglieren"></use>
+    </svg>
+    <svg class="icon" aria-hidden="true" id="icon4">
+        <use xlink:href="#icon-beidouxingSVG"></use>
+    </svg>
+</body>
+
+</html>
