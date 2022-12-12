@@ -95,8 +95,8 @@ def maxNumFib():
     for num in range(100000):
         fnum = Fibonacci_Recursion_tool(num)
         # print("第", str(num), "个数的值为：", str(fnum))
-        if fnum >= sys.maxsize:
-            res['index'] = num
+        if fnum > sys.maxsize:
+            res['index'] = num-1
             # print("最大值为：", str(fnum))
             break
     t1 = time.perf_counter()
